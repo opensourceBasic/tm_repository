@@ -40,6 +40,16 @@ void printCalendar(const char* weekDays[], int firstWeekDayOfMonth, int numberOf
     printf("\n");
 }
 
+// 리마인더를 작성하는 함수
+void writeReminder() {
+
+}
+
+// 리마인더를 저장하고 불러오는 함수
+void saveReminder() {
+
+}
+
 int main() {
     const char* months[12] = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
     const char* weekDays[7] = { "Sun","Mon","Tue","Wed","Thu","Fri","Sat" };
