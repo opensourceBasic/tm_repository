@@ -41,13 +41,38 @@ void printCalendar(const char* weekDays[], int firstWeekDayOfMonth, int numberOf
 }
 
 // 리마인더를 작성하는 함수
-void writeReminder() {
+void writeReminder(int numberOfDays, int currentMonth, int currentYear) {
+    int day;
+    char reminder[100];
 
-}
+    while (1) {
+        printf("날짜를 선택하세요: ");
+        if (scanf("%d", &day) != 1) {
+            printf("Invalid input. Please enter a valid day.\n");
+            while (getchar() != '\n'); // Clear input buffer
+            continue;
+        }
+        if (day > 0 && day <= numberOfDays)
+            break;
+        else
+            printf("1 and %d 사이의 날짜를 선택하세요.\n", numberOfDays);
+    }
 
-// 리마인더를 저장하고 불러오는 함수
-void saveReminder() {
+    printf("리마인더를 작성하세요: ");
+    if (scanf("%s", reminder) != 1) {
+        printf("잘못된 입력입니다.\n");
+        return;
+    }
 
+    FILE* fp;
+    fp = fopen("reminders.txt", "w");
+    if (fp == NULL) {
+        printf("파일 열기 실패\n");
+        return;
+    }
+    fprintf(fp, "%d-%02d-%02d:%s\n", currentYear, currentMonth, day, reminder);
+
+    fclose(fp);
 }
 
 int main() {
@@ -76,5 +101,24 @@ int main() {
 
     printCalendar(weekDays, firstWeekDayOfMonth, numberOfDays);
 
+    int num;
+  
+    printf("1: 리마인더 작성\n2: 리마인더 보기\n3: 리마인더 삭제\n4: 종료\n선택하세요: ");
+    scanf("%d", &num);
+        
+
+    switch (num) {
+    case 1:
+        writeReminder(numberOfDays, currentMonth, currentYear);
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    case 4:
+        system("python googleCalendar.py");
+        return;
+    }
+    system("python googleCalendar.py");
     return 0;
 }
